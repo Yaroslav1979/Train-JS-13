@@ -6,6 +6,20 @@
  * Повертає - json дані в яких всі числові значення збільшено на 1.
  */
 function complexConvert(data) {
+  const obj = {};
+  const parseObj = JSON.parse(data);
+  for (const key in parseObj) {
+    const value = parseObj[key]; // Отримуємо значення за ключем
+    if (typeof(value) === "number") {
+      obj[key] = value + 1; //Додаємо нове (змінене) значення в об'єкт
+    } else {
+    if (typeof(value) === "string") {
+      obj[key] = value};
+      obj[key] = value;
+  }
+}
+  return obj;
+
   // Створюємо новий порожній об'єкт для збереження результату.
   // Перетворюємо json дані в об'єкт та отримуємо всі ключі об'єкта.
   // Обходимо всі ключі та перевіряємо значення.
@@ -45,6 +59,23 @@ console.log(complexConvert(JSON.stringify(data)));
     params: Параметри URL у вигляді масиву пар [ключ, значення].
  */
 function manipulateUrl(url) {
+  const urlObject = new URL(url);
+  urlObject.protocol = 'https';
+  urlObject.hostname = 'newhost.com';
+  urlObject.searchParams.set('newParam', 'newValue'); // або urlObject.searchParams.append('newParam', 'newValue');
+  if (urlObject.searchParams.has("oldParam")) {
+    urlObject.searchParams.delete("oldParam");
+  }
+    const result = {
+      href: urlObject.href,
+      protocol: urlObject.protocol,
+      host: urlObject.host,
+      pathname: urlObject.pathname,
+      search: urlObject.search,
+      params: Array.from(urlObject.searchParams.entries()),
+    };
+   
+  return result
   // Створюємо новий об'єкт URL.
   // Змінюємо протокол URL на https.
   // Змінюємо хост URL на 'newhost.com'.
